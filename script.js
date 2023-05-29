@@ -1,12 +1,10 @@
-// Function to prevent double-tap zoom
-var lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
+function preventZoom(e) {
     var now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
+    if (now - this.lastTouchEnd <= 300) {
+        e.preventDefault();
     }
-    lastTouchEnd = now;
-}, false);
+    this.lastTouchEnd = now;
+}
 
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
     var text = document.getElementById('storyArea').value;
@@ -49,8 +47,15 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
         updateSentence();
     }
 
-    document.getElementById('prevWordButton').addEventListener('click', prevWord);
-    document.getElementById('nextWordButton').addEventListener('click', nextWord);
+    var prevButton = document.getElementById('prevWordButton');
+    prevButton.lastTouchEnd = 0;
+    prevButton.addEventListener('touchend', preventZoom, false);
+    prevButton.addEventListener('click', prevWord);
+
+    var nextButton = document.getElementById('nextWordButton');
+    nextButton.lastTouchEnd = 0;
+    nextButton.addEventListener('touchend', preventZoom, false);
+    nextButton.addEventListener('click', nextWord);
 
     updateSentence();
 });
