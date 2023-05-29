@@ -3,15 +3,20 @@ body {
 }
 
 #sentenceDisplay {
-    font-size: 24px;
+    font-size: 3em; /* adjust as necessary */
     width: 80%;
     margin: auto;
     margin-top: 20px;
-    height: 120px;
+    height: auto; /* adjust as necessary to accommodate larger font size */
     border: 1px solid #000;
     padding: 10px;
     white-space: pre-wrap;
     line-height: 1.6;
+}
+
+button {
+    font-size: 4em; /* adjust as necessary */
+    padding: 20px; /* adjust as necessary */
 }
 
 .highlight {
