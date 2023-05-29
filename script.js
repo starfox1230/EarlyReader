@@ -1,3 +1,13 @@
+// Function to prevent double-tap zoom
+var lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    var now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
     var text = document.getElementById('storyArea').value;
     var sentences = text.split(/(?<=[.!?])\s+(?=[a-z"])/i);
