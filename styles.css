@@ -13,7 +13,10 @@ body {
     white-space: pre-wrap;
     line-height: 1.6;
 }
-
+#buttons {
+    display: flex;
+    justify-content: center;
+}
 button {
     font-size: 4em; /* adjust as necessary */
     padding: 20px; /* adjust as necessary */
