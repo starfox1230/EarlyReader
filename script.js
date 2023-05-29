@@ -50,5 +50,9 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
         nextWord();
     });
 
+    // Hide the Insert Story button and text area after the button is clicked
+    document.getElementById('pasteStoryButton').style.display = 'none';
+    document.getElementById('storyArea').style.display = 'none';
+
     updateSentence();
 });
