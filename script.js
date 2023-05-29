@@ -1,11 +1,3 @@
-function preventZoom(e) {
-    var now = (new Date()).getTime();
-    if (now - this.lastTouchEnd <= 300) {
-        e.preventDefault();
-    }
-    this.lastTouchEnd = now;
-}
-
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
     var text = document.getElementById('storyArea').value;
     var sentences = text.split(/(?<=[.!?])\s+(?=[a-z"])/i);
@@ -47,15 +39,16 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
         updateSentence();
     }
 
-    var prevButton = document.getElementById('prevWordButton');
-    prevButton.lastTouchEnd = 0;
-    prevButton.addEventListener('touchend', preventZoom, false);
-    prevButton.addEventListener('click', prevWord);
-
-    var nextButton = document.getElementById('nextWordButton');
-    nextButton.lastTouchEnd = 0;
-    nextButton.addEventListener('touchend', preventZoom, false);
-    nextButton.addEventListener('click', nextWord);
+    // Use 'touchstart' event for more responsive interaction on touch devices
+    document.getElementById('prevWordButton').addEventListener('touchstart', function(e) {
+        e.preventDefault(); // Prevents the browser's default touch behavior
+        prevWord();
+    });
+    
+    document.getElementById('nextWordButton').addEventListener('touchstart', function(e) {
+        e.preventDefault(); // Prevents the browser's default touch behavior
+        nextWord();
+    });
 
     updateSentence();
 });
