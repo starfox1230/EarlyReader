@@ -1,18 +1,23 @@
 body {
     font-family: Arial, sans-serif;
     position: relative; /* so the child's absolute positioning is relative to the body */
-    min-height: 100vh; /* to ensure the body stretches the full viewport height */
+    height: 100vh; /* to ensure the body stretches the full viewport height */
+    padding-bottom: 70px; /* pushing the content up to adjust for mobile browsers */
+}
+
+#buttonWrapper {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 #buttons {
-    position: absolute; /* the button container will be taken out of the normal flow */
-    bottom: 0; /* placed at the bottom of the body */
-    width: 100%; /* take the full width to center the content */
     display: flex;
     justify-content: center;
 }
 
-/* other styles remain the same */
+/* Other styles remain the same */
 
 #sentenceDisplay {
     font-size: 3em;
