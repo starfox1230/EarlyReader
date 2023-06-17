@@ -1,41 +1,70 @@
 body {
-    font-family: Arial, sans-serif;
-    position: relative; /* so the child's absolute positioning is relative to the body */
-    height: 100vh; /* to ensure the body stretches the full viewport height */
-    padding-bottom: 70px; /* pushing the content up to adjust for mobile browsers */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Adding a soft background color */
+    color: #333; /* Dark grey color for texts for better contrast and readability */
+    position: relative;
+    height: 100vh;
+    padding-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #buttonWrapper {
     position: fixed;
-    left: 0;
+    right: 0; /* Changing from left to right as you want it to be on the right */
     bottom: 0;
-    width: 100%;
+    width: auto; /* Adjust the width to wrap the buttons instead of being full width */
+    padding: 10px; /* Add some padding around the buttons */
+    background-color: #fff; /* Add background color for visibility */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Shadow for depth */
 }
 
 #buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Space out the buttons */
 }
 
-/* Other styles remain the same */
-
 #sentenceDisplay {
-    font-size: 3em;
-    width: 80%;
+    font-size: 2em;
+    width: 90%;
     margin: auto;
     margin-top: 20px;
-    height: auto;
-    border: 1px solid #000;
     padding: 10px;
+    height: auto;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Shadow for depth */
     white-space: pre-wrap;
     line-height: 1.6;
+    background-color: #fff; /* White background */
+}
+
+textarea {
+    font-size: 1.2em;
+    padding: 10px;
+    width: 90%; /* Match with the sentence display width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Shadow for depth */
+    margin-bottom: 20px; /* Add some space at the bottom */
 }
 
 button {
-    font-size: 2em;
-    padding: 20px;
+    font-size: 1em;
+    padding: 15px;
+    margin: 0 5px; /* Add some space around the buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #0066ff; /* Blue background */
+    color: #fff; /* White text */
+}
+
+button:active { /* Change the button color when clicked */
+    background-color: #0052cc;
 }
 
 .highlight {
-    background-color: yellow;
+    background-color: #ffeb3b; /* Brighter yellow for better visibility */
+    color: #333; /* Dark text color for better contrast */
 }
