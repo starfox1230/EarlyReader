@@ -3,12 +3,12 @@ body {
     background-color: #f4f4f4; /* Adding a soft background color */
     color: #333; /* Dark grey color for texts for better contrast and readability */
     position: relative;
-    height: 100vh;
     padding-bottom: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: hidden; /* Disable vertical scrolling */
 }
 
 #buttonWrapper {
