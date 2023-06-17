@@ -11,12 +11,13 @@ body {
     overflow-y: hidden; /* Disable vertical scrolling */
 }
 
+
 #buttonWrapper {
     position: fixed;
     right: 0; /* Changing from left to right as you want it to be on the right */
     bottom: 0;
     width: auto; /* Adjust the width to wrap the buttons instead of being full width */
-    padding: 10px; /* Add some padding around the buttons */
+    padding: 5px; /* Add some padding around the buttons */
     background-color: #fff; /* Add background color for visibility */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Shadow for depth */
@@ -51,8 +52,8 @@ textarea {
 }
 
 button {
-    font-size: 1em;
-    padding: 15px;
+    font-size: 2em;
+    padding: 35px;
     margin: 0 5px; /* Add some space around the buttons */
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
