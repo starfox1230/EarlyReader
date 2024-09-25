@@ -50,10 +50,13 @@ function nextWord() {
 
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
     text = document.getElementById('storyArea').value;
-    // Updated regex for better sentence parsing
-    var rawSentences = text.match(/[^.!?]+[.!?]+(?:\s+|$)|.+$/g);
+    // Updated regex for better sentence parsing with quotations
+    var rawSentences = text.match(/[^.!?]+[.!?]+(?:["'”’]+)?(\s+|$)/g);
+    if (!rawSentences) {
+        rawSentences = [text]; // Handle case where regex returns null
+    }
     sentences = rawSentences.map(function(sentence) {
-        return sentence.split(/((?:\b\w+['’]\w+\b)|\b\w+\b|\s+|\S)/).filter(Boolean).map(function(token) {
+        return sentence.trim().split(/((?:\b\w+['’]\w+\b)|\b\w+\b|\s+|\S)/).filter(Boolean).map(function(token) {
             return { content: token, isWord: /\w/.test(token) };
         });
     });
