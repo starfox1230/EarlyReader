@@ -26,13 +26,12 @@ function prevWord() {
         } else if (currentSentenceIndex > 0) {
             currentSentenceIndex -= 1;
             currentWordIndex = sentences[currentSentenceIndex].length - 1;
-        } else { // If we've reached the beginning of the sentences, return to avoid crashing
+        } else {
             return;
         }
     } while (!sentences[currentSentenceIndex][currentWordIndex].isWord);
     updateSentence();
 }
-
 
 function nextWord() {
     if (!isStoryInserted) return;
@@ -42,7 +41,7 @@ function nextWord() {
         } else if (currentSentenceIndex < sentences.length - 1) {
             currentSentenceIndex += 1;
             currentWordIndex = 0;
-        } else { // If we've reached the end of the sentences, return to avoid crashing
+        } else {
             return;
         }
     } while (!sentences[currentSentenceIndex][currentWordIndex].isWord);
@@ -51,9 +50,10 @@ function nextWord() {
 
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
     text = document.getElementById('storyArea').value;
-    var rawSentences = text.split(/(?<=[.!?]["']?)\s+/);
+    // Updated regex for better sentence parsing
+    var rawSentences = text.match(/[^.!?]+[.!?]+(?:\s+|$)|.+$/g);
     sentences = rawSentences.map(function(sentence) {
-        return sentence.split(/((?:\b\w+['’]\w+\b)|\b\w+\b|\s+)/).filter(Boolean).map(function(token) {
+        return sentence.split(/((?:\b\w+['’]\w+\b)|\b\w+\b|\s+|\S)/).filter(Boolean).map(function(token) {
             return { content: token, isWord: /\w/.test(token) };
         });
     });
@@ -82,11 +82,35 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
     updateSentence();  // Highlight the first word
 });
 
-
 window.addEventListener('keydown', function(e) {
     if (e.key === "ArrowRight") {
         nextWord();
     } else if (e.key === "ArrowLeft") {
         prevWord();
+    } else if (e.key === "F1") {
+        e.preventDefault(); // Prevent default F1 action (help menu)
+        triggerWrongAnswerEffect();
+    } else if (e.key === " ") {
+        e.preventDefault(); // Prevent default spacebar scrolling
+        triggerCorrectAnswerEffect();
     }
 });
+
+function triggerWrongAnswerEffect() {
+    var highlightedWord = document.querySelector('.highlight');
+    if (!highlightedWord) return;
+    highlightedWord.classList.add('wrong-answer');
+    setTimeout(function() {
+        highlightedWord.classList.remove('wrong-answer');
+    }, 1000); // Revert after 1 second
+}
+
+function triggerCorrectAnswerEffect() {
+    var highlightedWord = document.querySelector('.highlight');
+    if (!highlightedWord) return;
+    highlightedWord.classList.add('correct-answer');
+    setTimeout(function() {
+        highlightedWord.classList.remove('correct-answer');
+        nextWord();
+    }, 500); // Short delay before moving to next word
+}
