@@ -31,6 +31,7 @@ function prevWord() {
         }
     } while (!sentences[currentSentenceIndex][currentWordIndex].isWord);
     updateSentence();
+    updateProgress(); // Update progress after moving to the previous word
 }
 
 function nextWord() {
@@ -46,6 +47,18 @@ function nextWord() {
         }
     } while (!sentences[currentSentenceIndex][currentWordIndex].isWord);
     updateSentence();
+    updateProgress(); // Update progress after moving to the next word
+}
+
+function updateProgress() {
+    var totalWords = sentences.reduce((sum, sentence) => sum + sentence.filter(token => token.isWord).length, 0);
+    var wordsBeforeCurrent = sentences.slice(0, currentSentenceIndex).reduce((sum, sentence) => sum + sentence.filter(token => token.isWord).length, 0);
+    var currentWordProgress = wordsBeforeCurrent + sentences[currentSentenceIndex].slice(0, currentWordIndex + 1).filter(token => token.isWord).length;
+
+    var progressPercentage = Math.floor((currentWordProgress / totalWords) * 100);
+
+    document.getElementById('progressBar').style.width = progressPercentage + '%';
+    document.getElementById('progressText').innerText = progressPercentage + '%';
 }
 
 document.getElementById('pasteStoryButton').addEventListener('click', function() {
@@ -83,6 +96,7 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
     document.getElementById('sentenceDisplay').style.display = 'block';
 
     updateSentence();  // Highlight the first word
+    updateProgress();  // Initialize progress bar at 0%
 });
 
 window.addEventListener('keydown', function(e) {
