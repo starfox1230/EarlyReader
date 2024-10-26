@@ -5,6 +5,7 @@ window.onload = function() {
 
 var text, sentences, currentSentenceIndex, currentWordIndex;
 var isStoryInserted = false;
+var spacebarEnabled = true; // Variable to toggle spacebar functionality
 
 function updateSentence() {
     var sentenceDisplay = document.getElementById('sentenceDisplay');
@@ -76,6 +77,7 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
     currentSentenceIndex = 0;
     currentWordIndex = 0;
     isStoryInserted = true;
+    spacebarEnabled = false; // Disable normal spacebar functionality
 
     document.getElementById('prevWordButton').addEventListener('touchstart', function(e) {
         e.preventDefault();
@@ -100,16 +102,18 @@ document.getElementById('pasteStoryButton').addEventListener('click', function()
 });
 
 window.addEventListener('keydown', function(e) {
-    if (e.key === "ArrowRight") {
-        nextWord();
-    } else if (e.key === "ArrowLeft") {
-        prevWord();
-    } else if (e.key === "F1") {
-        e.preventDefault(); // Prevent default F1 action (help menu)
-        triggerWrongAnswerEffect();
-    } else if (e.key === " ") {
-        e.preventDefault(); // Prevent default spacebar scrolling
-        triggerCorrectAnswerEffect();
+    if (!spacebarEnabled) {
+        if (e.key === "ArrowRight") {
+            nextWord();
+        } else if (e.key === "ArrowLeft") {
+            prevWord();
+        } else if (e.key === "F1") {
+            e.preventDefault(); // Prevent default F1 action (help menu)
+            triggerWrongAnswerEffect();
+        } else if (e.key === " ") {
+            e.preventDefault(); // Prevent default spacebar scrolling
+            triggerCorrectAnswerEffect();
+        }
     }
 });
 
